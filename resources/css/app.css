@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.test{
+    background: url('/storage/draw.svg');
+    height: 20vh;
+    width: 22em;
+    z-index: 100000;
+}
