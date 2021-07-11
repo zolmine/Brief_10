@@ -11,6 +11,6 @@ class HomeController extends Controller
 
     public function index(): Factory|View|Application
     {
-        return view('pages.home');
+        return view('pages.homeCom');
     }
 }

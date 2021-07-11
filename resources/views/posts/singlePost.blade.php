@@ -96,10 +96,12 @@
                                         <h1 class="text-white ">Author : {{$commentUser[$i]->fullName}}</h1>
                                         <p>{{$result[$i]->commentDate}}</p>
                                     </div>
+                                    <div class="border border-white rounded-2xl p-4">
 
-                                    <p class="text-white border border-white rounded-2xl p-4 max-w-xl ">
-                                        {{$result[$i]->commentContent}}
-                                    </p>
+                                        <p class="text-white  max-w-xl  flex flex-col">
+                                            {{$result[$i]->commentContent}}
+                                        </p>
+                                        </div>
                                 </div>
                             @endfor
 

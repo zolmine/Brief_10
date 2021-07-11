@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/posts', [PostsController::class, 'index'])->name('posts');
 Route::post('/posts', [PostsController::class, 'createNewPost']);
 Route::get('/posts/{param}', [PostsController::class, 'singlePost']);
+Route::post('/posts/edit', [PostsController::class, 'postEdit']);
+Route::get('/delete/{param}', [PostsController::class, 'deletePost']);
 
 Route::get('/login', [UserController::class, 'loginPage'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
@@ -27,13 +29,13 @@ Route::post('/login', [UserController::class, 'login']);
 Route::get('/register', [UserController::class, 'registerPage'])->name('register');
 Route::post('/register', [UserController::class, 'register']);
 
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::post('/posts/comment/{param}', [CommentsController::class, 'createNewComment']);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', function () {
-    return view('pages.home');
+    return view('pages.homeCom');
 });
 

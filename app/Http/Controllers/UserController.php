@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -85,12 +86,16 @@ class UserController extends Controller
 
     }
 
-    public function logout(): RedirectResponse
-    {
-        Auth::logout();
-        session_destroy();
+    public function logout(Request $request): Redirector|Application|RedirectResponse
+{
+    session_destroy();
 
-        return redirect()->route('home');
-    }
+    auth()->guest();
+    session_abort();
+    session_destroy();
+
+
+    return redirect()->route('home');
+}
 
 }

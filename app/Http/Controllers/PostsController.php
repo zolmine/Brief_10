@@ -9,16 +9,18 @@ use DateTime;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 
 class PostsController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware(['auth']);
     }
+
 
     public function index(): Factory|View|Application
     {
@@ -34,6 +36,7 @@ class PostsController extends Controller
                 "postTitle" => $row->postTitle,
                 "postDescription" => $row->postDescription,
                 "postDate" => $row->postDate,
+                "postContent" => $row->postContent,
                 "userId" => $row->userId,
                 "fullName" => $row->fullName,
                 "commentNbr" => $comment
@@ -55,7 +58,7 @@ class PostsController extends Controller
             "postTitle" => $_POST['title'],
             "postDescription" => $_POST['description'],
             "postContent" => $_POST['content'],
-            "postDate" => (new DateTime)->format('Y-m-d\TH:i:s')
+            "postDate" => (new DateTime)->format('Y-m-d')
         );
         (new Posts)->createNewPost($data);
         return redirect()->route('posts');
@@ -64,7 +67,6 @@ class PostsController extends Controller
 
     public function singlePost($param): Factory|View|Application
     {
-//        $author = User::all()->where('')
         $post = Posts::all()->where('postId', '=', $param)->first();
         $result = Comments::all()->where('commentPostId', '=', $param);
         $user = User::all()->where('userId', '=', $post->postUserId)->first();
@@ -83,5 +85,25 @@ class PostsController extends Controller
             "commentUser" => $commentUser
         ]);
 
+    }
+
+
+    public function postEdit(Request $request): RedirectResponse
+    {
+        $data = array(
+            "postId" => $request->postId,
+            "postTitle" => $request->title,
+            "postDescription" => $request->description,
+            "postContent" => $request->Content
+        );
+        (new Posts)->editPost($data);
+        return redirect()->route('posts')->with('success', 'Post updated successfully');
+    }
+
+    public function deletePost($pram): RedirectResponse
+    {
+        (new Posts)->deletePost($pram);
+
+        return redirect()->route('posts');
     }
 }

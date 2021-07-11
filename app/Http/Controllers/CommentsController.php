@@ -14,7 +14,7 @@ class CommentsController extends Controller
             "commentPostId" => $param,
             "commentUserId" => auth()->user()->userId,
             "commentContent" => $_POST['comment'],
-            "commentDate"   =>  (new DateTime)->format('Y-m-d\TH:i:s')
+            "commentDate"   =>  (new DateTime)->format('Y-m-d')
         );
 //        $singlePost = Posts::all()->where('postId', '=', $param)->first();
 

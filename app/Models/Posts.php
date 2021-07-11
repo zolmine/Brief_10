@@ -28,10 +28,24 @@ class Posts extends Model
 
     public function getPostswithCommentNumber(): \Illuminate\Support\Collection
     {
-      return DB::table('posts')
-          ->join('users', 'userId', '=', 'postUserId')
-          ->select()
-          ->get();
+        return DB::table('posts')
+            ->join('users', 'userId', '=', 'postUserId')
+            ->select()
+            ->get();
 
+    }
+
+    public function editPost($data)
+    {
+        DB::table('posts')
+            ->where('postId', '=', $data['postId'])
+            ->update($data);
+    }
+
+    public function deletePost($param)
+    {
+        DB::table('posts')
+            ->where('postId', '=', $param)
+            ->delete();
     }
 }

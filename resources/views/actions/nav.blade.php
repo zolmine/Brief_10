@@ -15,15 +15,18 @@
         <div class="px-12">
 
             @auth
-                <a href="{{ route('logout') }}"
-                    class="inline-flex items-center text-blue-700 bg-white rounded-2xl border-0 py-1 px-3 focus:outline-none hover:bg-blue-400 hover:text-gray-100 rounded text-base mt-4 md:mt-0">
-                    LogOut
-                    <svg class="mx-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                    </svg>
-                </a>
+                <form class="inline-flex items-center" action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit"
+                            class="inline-flex items-center text-blue-700 bg-white rounded-2xl border-0 py-1 px-3 focus:outline-none hover:bg-blue-400 hover:text-gray-100 rounded text-base mt-4 md:mt-0">
+                        LogOut
+                        <svg class="mx-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                        </svg>
+                    </button>
+                </form>
                 <p class="inline-flex items-center text-white text-sm font-bold">{{auth()->user()->fullName}}</p>
             @endauth
 

@@ -8,6 +8,7 @@
 @yield('singlePost')
 @yield('login')
 @yield('register')
+@yield('homeCom')
 </body>
 @include('actions.footer')
 </html>
